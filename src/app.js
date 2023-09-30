@@ -6,6 +6,6 @@ const app = express();
 
 app.use(morgan('dev'))//config para mostra msj por consola.
 
-app.use(authRoutes);
+app.use('/api',authRoutes);
 
 export default app;
