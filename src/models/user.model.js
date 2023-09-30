@@ -15,6 +15,8 @@ const usuarioSchema= new mongoose.Schema({
         type: String, 
         required: true 
     },
+},
+{timestamps:true//para saber la fecha en la que se creo
 })
 //exportacion de modelo para generar una coleccion de objetos en la db
 export default mongoose.model('Usuario', usuarioSchema)
