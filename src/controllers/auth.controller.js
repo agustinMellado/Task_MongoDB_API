@@ -15,18 +15,17 @@ export const register = async (req, res) => {
             password: passwordHash,//almaceno contrasena encriptada
         })
         const usuarioGuardado = await nuevoUsuario.save()//guardo el nuevo usuario
+        //mando el id del usuario para volverlo token xd
         const token = await crearAccesoToken({ id: usuarioGuardado._id })
         res.cookie('token', token);//lo almaceno en una cookie
         res.json({
-            message: 'usuario creado satisfactoriamente'
-        });
-        res.json({
-            id: nuevoUsuario._id,
-            nombre: nuevoUsuario.nombre,
-            email: nuevoUsuario.email,
-            createdAt: nuevoUsuario.createdAt,
-            updatedAt: nuevoUsuario.updatedAt
+            id: usuarioGuardado._id,
+            nombre: usuarioGuardado.nombre,
+            email: usuarioGuardado.email,
+            createdAt:usuarioGuardado.createdAt,
+            updatedAt: usuarioGuardado.updatedAt
         })
+        
     } catch (error) {
         console.log(error)
     }
