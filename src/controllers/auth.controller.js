@@ -1,6 +1,6 @@
 import Usuario from "../models/user.model.js"
 import bcrypt from "bcryptjs"
-import jwt from 'jsonwebtoken'
+import { crearAccesoToken } from '../libs/jwt.js'
 
 export const register = async (req, res) => {
     const { nombre, email, password } = req.body
@@ -15,22 +15,11 @@ export const register = async (req, res) => {
             password: passwordHash,//almaceno contrasena encriptada
         })
         const usuarioGuardado = await nuevoUsuario.save()//guardo el nuevo usuario
-
-        jwt.sign(
-            {
-                id: usuarioGuardado._id,
-            },
-            'fraseparageneraruntoken123',
-            {
-                expiresIn: '1d',//duracion 1 dia
-            },
-            (err, token) => {
-                if (err) console.log(err);
-                res.cookie('token', token);//lo almaceno en una cookie
-                res.json({
-                    message: 'usuario creado satisfactoriamente'
-                })
-            })
+        const token = await crearAccesoToken({ id: usuarioGuardado._id })
+        res.cookie('token', token);//lo almaceno en una cookie
+        res.json({
+            message: 'usuario creado satisfactoriamente'
+        });
         // res.json({
         //     id: nuevoUsuario._id,
         //     nombre: nuevoUsuario.nombre,
