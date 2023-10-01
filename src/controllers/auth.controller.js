@@ -20,14 +20,13 @@ export const register = async (req, res) => {
         res.json({
             message: 'usuario creado satisfactoriamente'
         });
-        // res.json({
-        //     id: nuevoUsuario._id,
-        //     nombre: nuevoUsuario.nombre,
-        //     email: nuevoUsuario.email,
-        //     createdAt: nuevoUsuario.createdAt,
-        //     updatedAt: nuevoUsuario.updatedAt
-
-        // })
+        res.json({
+            id: nuevoUsuario._id,
+            nombre: nuevoUsuario.nombre,
+            email: nuevoUsuario.email,
+            createdAt: nuevoUsuario.createdAt,
+            updatedAt: nuevoUsuario.updatedAt
+        })
     } catch (error) {
         console.log(error)
     }
