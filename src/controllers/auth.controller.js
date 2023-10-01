@@ -22,14 +22,41 @@ export const register = async (req, res) => {
             id: usuarioGuardado._id,
             nombre: usuarioGuardado.nombre,
             email: usuarioGuardado.email,
-            createdAt:usuarioGuardado.createdAt,
+            createdAt: usuarioGuardado.createdAt,
             updatedAt: usuarioGuardado.updatedAt
         })
-        
+
     } catch (error) {
-        res.status(500).json({message:error.message})
+        res.status(500).json({ message: error.message })
     }
 }
-export const login = (req, res) => { res.send('login') }
+export const login = async (req, res) => {
+    const { nombre, email } = req.body;
 
+
+    try {
+        //busco si el usuario existe
+        const usuarioExistente= await Usuario.findOne({email})
+        //si no lo encontro retornamos, si existe continuamos.
+        if(!usuarioExistente) return res.status(400).json({message:'El usuario no se encontro'});
+        //comparamos hash de contraseñas
+        const coincidenPass= await bcrypt.compare(password,usuarioExistente.password)
+        //si se encontro pero sus passwords no coinciden.
+        if(!coincidenPass) return res.status(400).json({message:'Contraseña incorrecta'})
+      
+        //mando el id del usuario existente
+        const token = await crearAccesoToken({ id: usuarioExistente._id })
+        res.cookie('token', token);//lo almaceno en una cookie
+        res.json({
+            id: usuarioGuardado._id,
+            nombre: usuarioGuardado.nombre,
+            email: usuarioGuardado.email,
+            createdAt: usuarioGuardado.createdAt,
+            updatedAt: usuarioGuardado.updatedAt
+        })
+
+    } catch (error) {
+        res.status(500).json({ message: error.message })
+    }
+}
 
