@@ -1,5 +1,6 @@
 import Usuario from "../models/user.model.js"
 import bcrypt from "bcryptjs"
+import jwt from 'jsonwebtoken'
 
 export const register = async (req, res) => {
     const { nombre, email, password } = req.body
@@ -11,10 +12,17 @@ export const register = async (req, res) => {
         const nuevoUsuario = new Usuario({
             nombre,
             email,
-            password:passwordHash//almaceno contrasena encriptada
+            password:passwordHash,//almaceno contrasena encriptada
         })
         await nuevoUsuario.save()//guardo el nuevo usuario
+        res.json({
+            id: nuevoUsuario._id,
+            nombre: nuevoUsuario.nombre,
+            email: nuevoUsuario.email,
+            createdAt: nuevoUsuario.createdAt,
+            updatedAt: nuevoUsuario.updatedAt
 
+        })
     } catch (error) {
         console.log(error)
     }
