@@ -24,6 +24,14 @@ export const getTask= async(req, res)=>{
     //muestro la tarea
     res.json(task)
 };
+export const deleteTask= async(req, res)=>{
+    //busco por id la tarea, y la elimino
+    const task= await Task.findByIdAndDelete(req.params.id);
+    //verifico que exista, sino
+    if(!task) return res.status(404).json({messege:'Tarea no encontrada'})
+    //muestro la tarea
+    res.json(task)
+};
 export const updateTask= async(req, res)=>{};
-export const deleteTask= async(req, res)=>{};
+
 
