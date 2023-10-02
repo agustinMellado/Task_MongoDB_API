@@ -12,6 +12,13 @@ const taskSchema=new mongoose.Schema({
     date: {
         type: Date,
         default:Date.now
+    },
+    user:{
+
+        //hago una referencia a la coleccion usuario tomando el id especifico.
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'Usuario',
+        require:true//el usuario tienen que ser si o si requerido
     }
 },{
     timestamps:true
