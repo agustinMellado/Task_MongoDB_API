@@ -8,7 +8,7 @@ const router = Router()
 //Tomar todos los elementos
 router.get('/task', authRequired,)
 //toma un solo elemento
-router.get('/task', authRequired,)
+router.get('/task:id', authRequired,)
 //crear un elemento
 router.post('/task', authRequired,)
 //borra un elemento
