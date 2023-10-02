@@ -32,6 +32,15 @@ export const deleteTask= async(req, res)=>{
     //muestro la tarea
     res.json(task)
 };
-export const updateTask= async(req, res)=>{};
+export const updateTask= async(req, res)=>{
+       //busco por id la tarea, y la actualizo
+       const task= await Task.findByIdAndUpdate(req.params.id,req.body, {
+        new : true//Funcion para que al actualizar muestre el ultimo valor modificado
+       });
+       //verifico que exista
+       if(!task) return res.status(404).json({messege:'Tarea no encontrada'})
+       //muestro la tarea
+       res.json(task)
+};
 
 
