@@ -31,7 +31,7 @@ export const register = async (req, res) => {
     }
 }
 export const login = async (req, res) => {
-    const { nombre, email } = req.body;
+    const { email,password} = req.body;
 
 
     try {
@@ -48,11 +48,11 @@ export const login = async (req, res) => {
         const token = await crearAccesoToken({ id: usuarioExistente._id })
         res.cookie('token', token);//lo almaceno en una cookie
         res.json({
-            id: usuarioGuardado._id,
-            nombre: usuarioGuardado.nombre,
-            email: usuarioGuardado.email,
-            createdAt: usuarioGuardado.createdAt,
-            updatedAt: usuarioGuardado.updatedAt
+            id: usuarioExistente._id,
+            nombre: usuarioExistente.nombre,
+            email: usuarioExistente.email,
+            createdAt: usuarioExistente.createdAt,
+            updatedAt: usuarioExistente.updatedAt
         })
 
     } catch (error) {
