@@ -13,7 +13,8 @@ export const createTask= async(req, res)=>{
         date
     })
     //la guardo en la bd
-    await newTask.save()
+    const tareaGuardada= await newTask.save();
+    res.json(tareaGuardada)
 };
 export const getTask= async(req, res)=>{};
 export const updateTask= async(req, res)=>{};
