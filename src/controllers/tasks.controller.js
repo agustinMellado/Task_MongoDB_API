@@ -9,14 +9,21 @@ export const createTask= async(req, res)=>{
     //Creo el objeto nuevo 
     const newTask= new Task({
         title,
-        description,
+        description, 
         date
     })
     //la guardo en la bd
     const tareaGuardada= await newTask.save();
     res.json(tareaGuardada)
 };
-export const getTask= async(req, res)=>{};
+export const getTask= async(req, res)=>{
+    //busco por id la tarea, tomado del req.
+    const task= await Task.findById(req.params.id);
+    //verifico que exista
+    if(!task) return res.status(404).json
+    //muestro la tarea
+    res.json(task)
+};
 export const updateTask= async(req, res)=>{};
 export const deleteTask= async(req, res)=>{};
 
