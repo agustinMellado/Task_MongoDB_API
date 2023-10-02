@@ -68,7 +68,17 @@ export const cerrarSesion = async (req, res) => {
     });
     return res.sendStatus(200);
 };
-export const profile = (req, res) => {
-    res.send('profile')
+export const profile = async (req, res) => {
+    const usuarioEncontrado= await Usuario.findById(req.user.id)//retorno toda la informacion perteneciente a ese usuario.
+    //valido que no este vacio
+    if(!usuarioEncontrado) return res.status(400).json({message: "Usuario no encontrado."})
+    
+    return res.json({
+        id: usuarioEncontrado._id,
+        nombre: usuarioEncontrado.nombre,
+        email: usuarioEncontrado.email,
+        createdAt: usuarioEncontrado.createdAt,
+        updatedAt: usuarioEncontrado.updatedAt
+    })
 }
 
