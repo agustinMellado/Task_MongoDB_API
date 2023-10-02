@@ -31,19 +31,19 @@ export const register = async (req, res) => {
     }
 }
 export const login = async (req, res) => {
-    const { email,password} = req.body;
+    const { email, password } = req.body;
 
 
     try {
         //busco si el usuario existe
-        const usuarioExistente= await Usuario.findOne({email})
+        const usuarioExistente = await Usuario.findOne({ email })
         //si no lo encontro retornamos, si existe continuamos.
-        if(!usuarioExistente) return res.status(400).json({message:'El usuario no se encontro'});
+        if (!usuarioExistente) return res.status(400).json({ message: 'El usuario no se encontro' });
         //comparamos hash de contraseñas
-        const coincidenPass= await bcrypt.compare(password,usuarioExistente.password)
+        const coincidenPass = await bcrypt.compare(password, usuarioExistente.password)
         //si se encontro pero sus passwords no coinciden.
-        if(!coincidenPass) return res.status(400).json({message:'Contraseña incorrecta'})
-      
+        if (!coincidenPass) return res.status(400).json({ message: 'Contraseña incorrecta' })
+
         //mando el id del usuario existente
         const token = await crearAccesoToken({ id: usuarioExistente._id })
         res.cookie('token', token);//lo almaceno en una cookie
@@ -59,4 +59,13 @@ export const login = async (req, res) => {
         res.status(500).json({ message: error.message })
     }
 }
+
+export const cerrarSesion = async (req, res) => {
+    res.cookie("token", "", {
+        httpOnly: true,
+        secure: true,
+        expires: new Date(0),
+    });
+    return res.sendStatus(200);
+};
 
