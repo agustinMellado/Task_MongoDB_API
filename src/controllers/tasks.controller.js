@@ -20,7 +20,7 @@ export const getTask= async(req, res)=>{
     //busco por id la tarea, tomado del req.
     const task= await Task.findById(req.params.id);
     //verifico que exista
-    if(!task) return res.status(404).json
+    if(!task) return res.status(404).json({messege:'Tarea no encontrada'})
     //muestro la tarea
     res.json(task)
 };
