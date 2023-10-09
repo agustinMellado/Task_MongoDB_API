@@ -1,7 +1,10 @@
 import Task from "../models/task.model.js";
 
 export const getTasks = async (req, res) => {
-    const tasks = await Task.find()//tomo todas las tareas
+    //me muestas todas las tareas
+    const tasks = await Task.find(
+        {user:req.user.id}//del usuario correspondiente
+    )
     res.json(tasks)
 };
 export const createTask = async (req, res) => {
@@ -11,7 +14,8 @@ export const createTask = async (req, res) => {
     const newTask = new Task({
         title,
         description,
-        date
+        date,
+        user:req.user.id//tomo el id del usuario creado.
     })
     //la guardo en la bd
     const tareaGuardada = await newTask.save();
