@@ -4,7 +4,7 @@ const defaultOptions = {
     namespace: 'expresscache',
     defaultTtl: '1 minute', // conversion 60*1000s
     statusCodeExpires: {
-        404: '5 minutos',
+        404: '5 minutes',
         500: 0//1 minuto en milisegundos.
     },
     //conexion con redis.
