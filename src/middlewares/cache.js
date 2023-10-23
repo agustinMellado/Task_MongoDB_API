@@ -2,7 +2,7 @@ import getExpeditiousCache from 'express-expeditious'
 
 const defaultOptions = {
     namespace: 'expresscache',
-    defaultTtl: '1 minute', // conversion 60*1000s
+    defaultTtl: '15 minute', // tiempo en la que se guarda la cache
     statusCodeExpires: {
         404: '5 minutes',
         500: 0//1 minuto en milisegundos.
