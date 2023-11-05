@@ -16,7 +16,7 @@ export const registerSchema = z.object({
     }),
 })
 
-export const loginUser = z.object({
+export const loginSchema = z.object({
     email: z.string({
         required_error: 'El email es requerido.'
     }).email({
