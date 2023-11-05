@@ -20,7 +20,8 @@
     "mongoose": "^7.5.3",
     "morgan": "^1.10.0",
     "redis": "^4.6.10",
-    "response-time": "^2.3.2"
+    "response-time": "^2.3.2",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"
