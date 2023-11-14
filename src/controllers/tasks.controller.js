@@ -23,7 +23,7 @@ export const createTask = async (req, res) => {
 };
 export const getTask = async (req, res) => {
     //busco por id la tarea, tomado del req.
-    const task = await Task.findById(req.params.id);
+    const task = await Task.findById(req.params.id).populate('user');
     //verifico que exista
     if (!task) return res.status(404).json({ messege: 'Tarea no encontrada' })
     //muestro la tarea
@@ -34,8 +34,9 @@ export const deleteTask = async (req, res) => {
     const task = await Task.findByIdAndDelete(req.params.id);
     //verifico que exista, sino ...
     if (!task) return res.status(404).json({ messege: 'Tarea no encontrada' })
-    //muestro la tarea
-    res.json(task)
+
+    //retorno un codigo de estado para confirmar que la tarea se elimino
+    return res.sendStatus(204)
 };
 export const updateTask = async (req, res) => {
     //busco por id la tarea, y la actualizo
