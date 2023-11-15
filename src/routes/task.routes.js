@@ -3,7 +3,7 @@ import { authRequired } from "../middlewares/validateToken.js"
 import { getTasks, getTask, createTask, deleteTask, updateTask } from "../controllers/tasks.controller.js";
 import cacheInit from "../middlewares/cache.js";
 import { validateSchema } from "../middlewares/validator.middleware.js";
-import { createTaskSchema } from "../schemas/auth.schema.js"
+import { createTaskSchema } from "../schemas/createTask.schema.js"
 
 const router = Router()
 /* 
