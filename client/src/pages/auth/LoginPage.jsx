@@ -5,4 +5,4 @@ function LoginPage() {
   )
 }
 
-export default LoginPages
+export default LoginPage
