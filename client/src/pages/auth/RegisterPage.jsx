@@ -3,16 +3,15 @@ import { registerRequest } from "../../api/auth";
 function RegisterPage() {
   //almaceno la informacion de los 2 objetos
   const { register, handleSubmit } = useForm();
+
+  const onSubmit = handleSubmit(async (values) => {
+    const res = await registerRequest(values);
+    console.log(res);
+  });
   return (
     <div className="bg-zinc-800 max-w-md p-10 rounded-md">
       {/* formulario */}
-      <form
-        onSubmit={handleSubmit(async (values) => {
-          console.log(values);
-          const res = await registerRequest(values);
-          console.log(res);
-        })}
-      >
+      <form onSubmit={onSubmit}>
         <input
           type="text"
           {...register("nombre", { required: true })}
