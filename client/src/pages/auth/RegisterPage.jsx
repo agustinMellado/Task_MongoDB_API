@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
 function RegisterPage() {
+  //almaceno la informacion de los 2 objetos
   const { register, handleSubmit } = useForm();
   return (
     <div className="bg-zinc-800 max-w-md p-10 rounded-md">
