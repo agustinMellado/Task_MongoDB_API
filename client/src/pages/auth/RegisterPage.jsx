@@ -5,7 +5,9 @@ import { useNavigate } from "react-router-dom";
 
 function RegisterPage() {
   //almaceno la informacion de los 2 objetos
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, formState:{
+    errors
+  }} = useForm();
   const { signUp, isAuthenticated } = useAuth();
   const navigate = useNavigate();
   // redirigir al usuario cuando el estado de autenticación se vuelve verdadero.
@@ -17,7 +19,7 @@ function RegisterPage() {
     signUp(values);
   });
   return (
-    <div className="bg-zinc-800 max-w-md p-10 rounded-md">
+    <div className="bg-zinc-800 max-w-md p-10 rounded-md my-2">
       {/* formulario */}
       <form onSubmit={onSubmit}>
         <input
@@ -26,18 +28,21 @@ function RegisterPage() {
           className="w-full bg-zinc-700 text-white px-4 py-2 rounded-md m-2"
           placeholder="Ingrese su nombre"
         />
+        {errors.nombre && <p className="text-red-500">Este campo es requerido</p>}
         <input
           type="email"
           {...register("email", { required: true })}
           className="w-full bg-zinc-700 text-white px-4 py-2 rounded-md m-2"
           placeholder="Ingrese su email"
         />
+        {errors.email && <p className="text-red-500">Este campo es requerido</p>}
         <input
           type="password"
           {...register("password", { required: true })}
           className="w-full bg-zinc-700 text-white px-4 py-2 rounded-md m-2"
           placeholder="Ingrese su contraseña"
         />
+        {errors.password && <p className="text-red-500">Este campo es requerido</p>}
         <button type="submit">Registrar</button>
       </form>
     </div>
