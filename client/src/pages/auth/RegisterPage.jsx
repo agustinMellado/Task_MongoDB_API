@@ -1,10 +1,18 @@
 import { useForm } from "react-hook-form";
 import { useAuth } from "../../context/authContext";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
 function RegisterPage() {
   //almaceno la informacion de los 2 objetos
   const { register, handleSubmit } = useForm();
-  const { signUp, user } = useAuth();
-  console.log(user);
+  const { signUp, isAuthenticated } = useAuth();
+  const navigate = useNavigate();
+  // redirigir al usuario cuando el estado de autenticación se vuelve verdadero.
+  useEffect(() => {
+    if (isAuthenticated) navigate("/tasks"); //si es true, redirijo.
+  }, [isAuthenticated]);
+
   const onSubmit = handleSubmit(async (values) => {
     signUp(values);
   });
