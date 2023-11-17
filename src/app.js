@@ -10,7 +10,7 @@ const app = express();
 
 
 app.use(cors(//permite que todos los dominios se comuniquen en este servicio
-    { origin: 'http://127.0.0.1:5173' }//especifico el puerto front a comunicar
+    { origin: 'http://localhost:5173' }//especifico el puerto front a comunicar
 ))
 app.use(morgan('dev'))//config para mostra msj por consola.
 app.use(express.json());// para que convertir los req.body en un formato json

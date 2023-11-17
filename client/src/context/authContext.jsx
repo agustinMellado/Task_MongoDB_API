@@ -13,8 +13,8 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
-  const signup = async (user) => {
-    const res = await registerRequest(values);
+  const signUp = async (user) => {
+    const res = await registerRequest(user);
     console.log(res);
     setUser(res.data);
   };
@@ -23,7 +23,7 @@ export const AuthProvider = ({ children }) => {
     <AuthContext.Provider
       value={{
         // estos valores pueden ser llamados
-        signup,
+        signUp,
         user,
       }}
     >

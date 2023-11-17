@@ -4,7 +4,7 @@ function RegisterPage() {
   //almaceno la informacion de los 2 objetos
   const { register, handleSubmit } = useForm();
   const { signUp, user } = useAuth();
-  console.log(user)
+  console.log(user);
   const onSubmit = handleSubmit(async (values) => {
     signUp(values);
   });
