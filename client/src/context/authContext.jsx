@@ -1,6 +1,14 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useContext } from "react";
 import { registerRequest } from "../api/auth";
 export const AuthContext = createContext();
+
+export const useAuth = () => {
+  const context = useContext(authContext);
+  if (!context) {
+    throw new Error("userAuth must be used within an authProvider");
+  }
+  return context
+};
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -11,7 +19,14 @@ export const AuthProvider = ({ children }) => {
     setUser(res.data);
   };
   return (
-    <AuthContext.Provider value={{ signup, user }}>
+    //permite compartir los valores a todos los componentes
+    <AuthContext.Provider
+      value={{
+        // estos valores pueden ser llamados
+        signup,
+        user,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
