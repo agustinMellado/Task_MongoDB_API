@@ -7,17 +7,26 @@ export const useAuth = () => {
   if (!context) {
     throw new Error("userAuth must be used within an authProvider");
   }
-  return context
+  return context;
 };
 
 export const AuthProvider = ({ children }) => {
+  //estados
   const [user, setUser] = useState(null);
-
+  const [isAuthenticated, setIsAuthenticated] = useState(false); //toma los valores de autentificacion de user
   const signUp = async (user) => {
-    const res = await registerRequest(user);
-    console.log(res);
-    setUser(res.data);
+    try {
+      // Llama a la función registerRequest con el objeto de usuario como parámetro.
+      const res = await registerRequest(user);
+      // Establece el estado del usuario con los datos de la respuesta.
+      setUser(res.data);
+      // Cambia el estado de autenticación a true.
+      setIsAuthenticated(true);
+    } catch (error) {// Captura y maneja cualquier error que pueda ocurrir durante el registro.
+      console.log(error);
+    }
   };
+
   return (
     //permite compartir los valores a todos los componentes
     <AuthContext.Provider
