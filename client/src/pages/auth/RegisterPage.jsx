@@ -1,11 +1,12 @@
 import { useForm } from "react-hook-form";
-import { registerRequest } from "../../api/auth";
+import { useAuth } from "../../context/authContext";
 function RegisterPage() {
   //almaceno la informacion de los 2 objetos
   const { register, handleSubmit } = useForm();
-
+  const { signUp, user } = useAuth();
+  console.log(user)
   const onSubmit = handleSubmit(async (values) => {
-   
+    signUp(values);
   });
   return (
     <div className="bg-zinc-800 max-w-md p-10 rounded-md">

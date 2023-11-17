@@ -3,7 +3,7 @@ import { registerRequest } from "../api/auth";
 export const AuthContext = createContext();
 
 export const useAuth = () => {
-  const context = useContext(authContext);
+  const context = useContext(AuthContext);
   if (!context) {
     throw new Error("userAuth must be used within an authProvider");
   }
