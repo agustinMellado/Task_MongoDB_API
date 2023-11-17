@@ -14,7 +14,7 @@ export const AuthProvider = ({ children }) => {
   //estados
   const [user, setUser] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false); //toma los valores de autentificacion de user
-  const [errors, setErrors] = useState(null)
+  const [errors, setErrors] = useState([])
 
 
 
