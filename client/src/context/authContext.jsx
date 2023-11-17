@@ -14,6 +14,11 @@ export const AuthProvider = ({ children }) => {
   //estados
   const [user, setUser] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false); //toma los valores de autentificacion de user
+  const [errors, setErrors] = useState(null)
+
+
+
+
   const signUp = async (user) => {
     try {
       // Llama a la función registerRequest con el objeto de usuario como parámetro.
@@ -23,7 +28,8 @@ export const AuthProvider = ({ children }) => {
       // Cambia el estado de autenticación a true.
       setIsAuthenticated(true);
     } catch (error) {// Captura y maneja cualquier error que pueda ocurrir durante el registro.
-      console.log(error);
+      console.log(error.response);
+      setErrors(error.response.data)
     }
   };
 
@@ -34,7 +40,8 @@ export const AuthProvider = ({ children }) => {
         // estos valores pueden ser llamados
         signUp,
         user,
-        isAuthenticated
+        isAuthenticated,
+        errors
       }}
     >
       {children}
