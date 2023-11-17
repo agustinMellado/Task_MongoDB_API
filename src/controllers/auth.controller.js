@@ -4,10 +4,15 @@ import { crearAccesoToken } from '../libs/jwt.js'
 
 export const register = async (req, res) => {
     const { nombre, email, password } = req.body
-    //genera un hash
-    const passwordHash = await bcrypt.hash(password, 10);
+
 
     try {
+
+        //validamos la existencia del usuario
+        const userFound = await User.findOne({email})
+        if(userFound) return res.status(400).json({message:['El email utilizado pertenece a un usuario existente.']})
+        //genera un hash
+        const passwordHash = await bcrypt.hash(password, 10);
         //creo un nuevo objeto
         const nuevoUsuario = new Usuario({
             nombre,
@@ -69,10 +74,10 @@ export const cerrarSesion = async (req, res) => {
     return res.sendStatus(200);
 };
 export const profile = async (req, res) => {
-    const usuarioEncontrado= await Usuario.findById(req.user.id)//retorno toda la informacion perteneciente a ese usuario.
+    const usuarioEncontrado = await Usuario.findById(req.user.id)//retorno toda la informacion perteneciente a ese usuario.
     //valido que no este vacio
-    if(!usuarioEncontrado) return res.status(400).json({message: "Usuario no encontrado."})
-    
+    if (!usuarioEncontrado) return res.status(400).json({ message: "Usuario no encontrado." })
+
     return res.json({
         id: usuarioEncontrado._id,
         nombre: usuarioEncontrado.nombre,
