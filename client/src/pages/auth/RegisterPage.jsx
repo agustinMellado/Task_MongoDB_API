@@ -4,28 +4,30 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 function RegisterPage() {
-  //almaceno la informacion de los 2 objetos
+  //almaceno la informacion de los objetos
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const { signUp, isAuthenticated, errors:RegisterErrors } = useAuth();
+  const { signUp, isAuthenticated, errors:registerErrors } = useAuth();
   const navigate = useNavigate();
-  // redirigir al usuario cuando el estado de autenticación se vuelve verdadero.
-  useEffect(() => {
-    if (isAuthenticated) navigate("/tasks"); //si es true, redirijo.
-  }, [isAuthenticated]);
+
 
   const onSubmit = handleSubmit(async (values) => {
     signUp(values);
   });
+  // redirigir al usuario cuando el estado de autenticación se vuelve verdadero.
+  useEffect(() => {
+    if (isAuthenticated) navigate("/tasks"); //si es true, redirijo.
+  }, [isAuthenticated]); 
+  
+
   return (
     
     <div className="bg-zinc-800 max-w-md p-10 rounded-md">
-      {
-        RegisterErrors.map((error,i)=>(
-          <div className="bg-red-500 p-2">
+      { registerErrors.map((error,i)=>(
+          <div className="bg-red-500 p-2" key={i}>
             {error}
           </div>
         ))

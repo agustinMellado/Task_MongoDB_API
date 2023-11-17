@@ -28,7 +28,7 @@ export const AuthProvider = ({ children }) => {
       // Cambia el estado de autenticación a true.
       setIsAuthenticated(true);
     } catch (error) {// Captura y maneja cualquier error que pueda ocurrir durante el registro.
-      console.log(error.response);
+      // console.log(error.response);
       setErrors(error.response.data)
     }
   };

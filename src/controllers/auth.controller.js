@@ -3,14 +3,15 @@ import bcrypt from "bcryptjs"
 import { crearAccesoToken } from '../libs/jwt.js'
 
 export const register = async (req, res) => {
-    const { nombre, email, password } = req.body
-
+    
 
     try {
+        const { nombre, email, password } = req.body
 
         //validamos la existencia del usuario
         const userFound = await User.findOne({ email });
-        if (userFound) return res.status(400).json(['El email utilizado pertenece a un usuario existente.']);
+        if (userFound) 
+            return res.status(400).json(['El email utilizado pertenece a un usuario existente.']);
         //genera un hash
         const passwordHash = await bcrypt.hash(password, 10);
         //creo un nuevo objeto
