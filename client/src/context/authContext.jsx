@@ -34,6 +34,7 @@ export const AuthProvider = ({ children }) => {
         // estos valores pueden ser llamados
         signUp,
         user,
+        isAuthenticated
       }}
     >
       {children}
