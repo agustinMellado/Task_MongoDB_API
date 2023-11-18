@@ -1,4 +1,4 @@
-import { createContext, useState, useContext } from "react";
+import { createContext, useState, useContext, useEffect } from "react";
 import { registerRequest } from "../api/auth";
 import { loginRequest } from "../api/auth";
 export const AuthContext = createContext();
@@ -43,6 +43,14 @@ const signIn =async(user)=>{
 
   }
 }
+//contador para hacer desaparecer los msj de error
+useEffect(()=>{
+if(errors.length>0){
+  setTimeout(()=>{//tiempo que va a mostrar el error
+    setErrors([])//le seteo un arreglo vacio nuevamente
+  },5000)
+}
+},[errors])
   return (
     //permite compartir los valores a todos los componentes
     <AuthContext.Provider
