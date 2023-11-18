@@ -6,6 +6,7 @@ import { AuthProvider } from "./context/authContext";
 import TaskPage from "./pages/task/TaskPage";
 import TaskFormPage from "./pages/task/TaskFormPage";
 import ProfilePage from "./pages/profile/ProfilePage";
+import HomePage from "./pages/home/HomePage";
 
 function App() {
   return (
@@ -13,7 +14,7 @@ function App() {
       <BrowserRouter>
       <Routes>
         //Rutas
-        <Route path="/" element={<h1>Home page</h1>}/>
+        <Route path="/" element={<HomePage/>}/>
         <Route path="/login" element={<LoginPage/>}/>
         <Route path="/register" element={<RegisterPage/>}/>
         <Route path="/tasks" element={<TaskPage/>}/>
