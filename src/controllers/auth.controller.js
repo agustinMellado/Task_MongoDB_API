@@ -33,7 +33,6 @@ export const register = async (req, res) => {
 
     } catch (error) {
         res.status(500).json({ message: error.message, })
-        console.log("aca no esta pasando xd")
     }
 }
 export const login = async (req, res) => {
