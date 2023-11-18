@@ -12,17 +12,19 @@ function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
-      <Routes>
-        //Rutas
-        <Route path="/" element={<HomePage/>}/>
-        <Route path="/login" element={<LoginPage/>}/>
-        <Route path="/register" element={<RegisterPage/>}/>
-        <Route path="/tasks" element={<TaskPage/>}/>
-        <Route path="/add-task" element={<TaskFormPage/>}/>
-        <Route path="/tasks/:id" element={<TaskFormPage/>}/>
-        <Route path="/profile" element={<h1><ProfilePage/></h1>}/>
-      </Routes>
-    </BrowserRouter>
+        <Routes>
+          //Rutas
+          <Route path="/" element={<HomePage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route element="">
+            <Route path="/tasks" element={<TaskPage />} />
+            <Route path="/add-task" element={<TaskFormPage />} />
+            <Route path="/tasks/:id" element={<TaskFormPage />} />
+            <Route path="/profile" element={<ProfilePage />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </AuthProvider>
   );
 }
