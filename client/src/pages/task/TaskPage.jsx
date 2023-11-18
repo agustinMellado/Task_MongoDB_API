@@ -1,7 +1,9 @@
 import React from 'react'
 
-export default function TaskPage() {
+function TaskPage() {
   return (
     <div>TaskPage</div>
   )
 }
+
+export default TaskPage

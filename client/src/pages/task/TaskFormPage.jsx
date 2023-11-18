@@ -1,7 +1,9 @@
 import React from 'react'
 
-export default function TaskFormPage() {
+function TaskFormPage() {
   return (
     <div>TaskFormPage</div>
   )
 }
+
+export default TaskFormPage
