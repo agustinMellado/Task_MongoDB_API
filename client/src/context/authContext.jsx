@@ -18,7 +18,7 @@ export const AuthProvider = ({ children }) => {
 
 
 
-
+//funcion para registro
   const signUp = async (user) => {
     try {
       // Llama a la función registerRequest con el objeto de usuario como parámetro.
@@ -32,7 +32,10 @@ export const AuthProvider = ({ children }) => {
       setErrors(error.response.data)
     }
   };
-
+//funcion para inicio de sesion
+const signIn =async(user)=>{
+  
+}
   return (
     //permite compartir los valores a todos los componentes
     <AuthContext.Provider
