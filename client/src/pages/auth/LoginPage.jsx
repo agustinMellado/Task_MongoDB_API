@@ -12,7 +12,9 @@ function LoginPage() {
 
   return (
     <div className="flex h-[calc(100vh-100px)] items-center justify-center">
-      <div className="bg-zinc-800 max-w-md p-10 rounded-md">
+      <div className="bg-zinc-800 max-w-md w-full p-10 rounded-md">
+
+        <h1 className="text-2xl font-bold">INICIAR SESION</h1>
         {/* formulario */}
         <form onSubmit={onSubmit}>
           <input
