@@ -10,9 +10,8 @@ function RegisterPage() {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const { signUp, isAuthenticated, errors:registerErrors } = useAuth();
+  const { signUp, isAuthenticated, errors: registerErrors } = useAuth();
   const navigate = useNavigate();
-
 
   const onSubmit = handleSubmit(async (values) => {
     signUp(values);
@@ -20,18 +19,15 @@ function RegisterPage() {
   // redirigir al usuario cuando el estado de autenticación se vuelve verdadero.
   useEffect(() => {
     if (isAuthenticated) navigate("/tasks"); //si es true, redirijo.
-  }, [isAuthenticated]); 
-  
+  }, [isAuthenticated]);
 
   return (
-    
     <div className="bg-zinc-800 max-w-md p-10 rounded-md">
-      { registerErrors.map((error,i)=>(
-          <div className="bg-red-500 p-2" key={i}>
-            {error}
-          </div>
-        ))
-      }
+      {registerErrors.map((error, i) => (
+        <div className="bg-red-500 p-2" key={i}>
+          {error}
+        </div>
+      ))}
       {/* formulario */}
       <form onSubmit={onSubmit}>
         <input
