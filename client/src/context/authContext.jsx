@@ -46,9 +46,10 @@ const signIn =async(user)=>{
 //contador para hacer desaparecer los msj de error
 useEffect(()=>{
 if(errors.length>0){
-  setTimeout(()=>{//tiempo que va a mostrar el error
+  const timer = setTimeout(()=>{//tiempo que va a mostrar el error
     setErrors([])//le seteo un arreglo vacio nuevamente
   },5000)
+  return ()=> clearTimeout(timer)//destruyo el timer para que no consuma recursos
 }
 },[errors])
   return (
