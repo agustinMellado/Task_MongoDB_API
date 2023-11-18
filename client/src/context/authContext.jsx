@@ -34,7 +34,13 @@ export const AuthProvider = ({ children }) => {
   };
 //funcion para inicio de sesion
 const signIn =async(user)=>{
-  
+  try{
+    const res = await loginRequest(user);
+    console.log(res)
+  }catch (error){
+    console.error(error)
+
+  }
 }
   return (
     //permite compartir los valores a todos los componentes
@@ -42,6 +48,7 @@ const signIn =async(user)=>{
       value={{
         // estos valores pueden ser llamados
         signUp,
+        signIn,
         user,
         isAuthenticated,
         errors
