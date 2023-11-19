@@ -63,7 +63,7 @@ export const AuthProvider = ({ children }) => {
 //lector de cookies
 useEffect(()=>{
   const cookies =Cookies.get();
-  console.log(cookies.token)
+ // console.log(cookies.token)
   if(cookies.token) {
     console.log(cookies.token)
   }
