@@ -1,7 +1,7 @@
 import { createContext, useState, useContext, useEffect } from "react";
-import { registerRequest } from "../api/auth";
+import { registerRequest, verificarToken } from "../api/auth";
 import { loginRequest } from "../api/auth";
-import Cookies from "js-cookie"
+import Cookies from "js-cookie";
 export const AuthContext = createContext();
 
 export const useAuth = () => {
@@ -37,7 +37,7 @@ export const AuthProvider = ({ children }) => {
   const signIn = async (user) => {
     try {
       const res = await loginRequest(user);
-  
+
       // Cambia el estado de autenticación a true.
       setIsAuthenticated(true);
       // Establece el estado del usuario con los datos de la respuesta.
@@ -60,15 +60,25 @@ export const AuthProvider = ({ children }) => {
       return () => clearTimeout(timer); //destruyo el timer para que no consuma recursos
     }
   }, [errors]);
-//lector de cookies
-useEffect(()=>{
-  const cookies =Cookies.get();
- // console.log(cookies.token)
-  if(cookies.token) {
-    console.log(cookies.token)
-  }
-  },[]);
-
+  //lector de cookies
+  useEffect(() => {
+    function checkLogin() {
+      const cookies = Cookies.get();
+      // console.log(cookies.token)
+      if (cookies.token) {
+        try {
+          const res = verificarToken(cookies.token);
+          console.log(res);
+          if (!res.data) setIsAuthenticated(false);
+          isAuthenticated(true);
+        } catch (error) {
+          setIsAuthenticated(false);
+          setUser(null);
+        }
+      }
+    }
+    checkLogin();
+  }, []);
 
   return (
     //permite compartir los valores a todos los componentes
