@@ -36,7 +36,11 @@ export const AuthProvider = ({ children }) => {
   const signIn = async (user) => {
     try {
       const res = await loginRequest(user);
-      console.log(res);
+  
+      // Cambia el estado de autenticación a true.
+      setIsAuthenticated(true);
+      // Establece el estado del usuario con los datos de la respuesta.
+      setUser(res.data);
     } catch (error) {
       // Captura y maneja cualquier error que pueda ocurrir durante el registro.
       if (Array.isArray(error.response.data)) {
