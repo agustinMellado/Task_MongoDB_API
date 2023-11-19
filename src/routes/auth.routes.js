@@ -11,7 +11,7 @@ const router = Router()
 router.post('/register', validateSchema(registerSchema), register)
 router.post('/login', validateSchema(loginSchema), login)
 router.post('/cerrarSesion', cerrarSesion)
-router.get('verify',verificarToken)
+router.get('/verify',verificarToken)
 router.get('/profile', authRequired, profile)
 
 export default router;
