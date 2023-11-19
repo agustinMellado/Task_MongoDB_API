@@ -1,9 +1,19 @@
-import React from 'react'
+import {createContext, useContext} from 'react'
 
-function taskContext() {
-  return (
-    <div>taskContext</div>
-  )
+const TaskContext = createContext();
+export const useTasks=()=> {
+    const context= useContext(TaskContext);
+
+    if(!context){
+        throw new Error('useTasks must be used within a TaskProvider');
+    }
 }
 
-export default taskContext
+
+export function TaskProvider({children}){
+    return(
+        <TaskContext.Provider value={{}}>
+            {children}
+        </TaskContext.Provider>
+    )
+}
