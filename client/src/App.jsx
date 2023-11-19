@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./context/authContext";
-import{TaskProvider} from "./context/taskProvider";
+
 import RegisterPage from "./pages/auth/RegisterPage";
 import LoginPage from "./pages/auth/LoginPage";
 import TaskPage from "./pages/task/TaskPage";
@@ -8,6 +8,7 @@ import TaskFormPage from "./pages/task/TaskFormPage";
 import ProfilePage from "./pages/profile/ProfilePage";
 import HomePage from "./pages/home/HomePage";
 import ProtectedRoutes from "./ProtectedRoutes";
+import{TaskProvider} from "./context/taskContext";
 
 function App() {
   return (

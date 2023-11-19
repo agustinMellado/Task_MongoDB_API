@@ -7,6 +7,7 @@ export const useTasks=()=> {
     if(!context){
         throw new Error('useTasks must be used within a TaskProvider');
     }
+    return context
 }
 
 
