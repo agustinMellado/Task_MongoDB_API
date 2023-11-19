@@ -1,9 +1,9 @@
-import jwt from 'jsonwebtoken'
+import { TOKEN_SECRET } from "../config.js";
+import jwt from "jsonwebtoken";
 export function crearAccesoToken(payload) {
     return new Promise((resolve, reject) => {
         jwt.sign(
-            payload,
-            'fraseparageneraruntoken123',
+            payload, TOKEN_SECRET,
             {
                 expiresIn: '1d',//duracion 1 dia
             },
