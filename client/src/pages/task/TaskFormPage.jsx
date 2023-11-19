@@ -18,7 +18,7 @@ function TaskFormPage() {
         <textarea
           rows="10"
           placeholder="Descripcion"
-          {...register("descripcion")}
+          {...register("description")}
           className="w-full bg-zinc-700 text-white px-4 py-2 rounded-md"
         ></textarea>
         <button>Guardar</button>
