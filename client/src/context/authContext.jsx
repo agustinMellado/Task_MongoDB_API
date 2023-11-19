@@ -1,6 +1,7 @@
 import { createContext, useState, useContext, useEffect } from "react";
 import { registerRequest } from "../api/auth";
 import { loginRequest } from "../api/auth";
+import Cookies from "js-cookie"
 export const AuthContext = createContext();
 
 export const useAuth = () => {
@@ -59,6 +60,16 @@ export const AuthProvider = ({ children }) => {
       return () => clearTimeout(timer); //destruyo el timer para que no consuma recursos
     }
   }, [errors]);
+//lector de cookies
+useEffect(()=>{
+  const cookies =Cookies.get();
+  console.log(cookies.token)
+  if(cookies.token) {
+    console.log(cookies.token)
+  }
+  },[]);
+
+
   return (
     //permite compartir los valores a todos los componentes
     <AuthContext.Provider
