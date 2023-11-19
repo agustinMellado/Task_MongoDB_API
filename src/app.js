@@ -5,13 +5,14 @@ import cors from 'cors';
 
 import authRoutes from './routes/auth.routes.js';
 import taskRoutes from './routes/task.routes.js'
+import { FRONTEND_URL } from "./config.js";
 
 const app = express();
 
 
 app.use(cors(//permite que todos los dominios se comuniquen en este servicio
     {
-        origin: 'http://localhost:5173',//especifico el puerto front a comunicar
+        origin: FRONTEND_URL,//especifico el puerto front a comunicar
         credentials:true//permite establecer las cookies
     }
 ))

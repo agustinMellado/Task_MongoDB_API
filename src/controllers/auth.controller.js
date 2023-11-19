@@ -1,16 +1,18 @@
 import Usuario from "../models/user.model.js"
 import bcrypt from "bcryptjs"
 import { crearAccesoToken } from '../libs/jwt.js'
+import jwt from "jsonwebtoken";
+import { TOKEN_SECRET } from '../config.js'
 
 export const register = async (req, res) => {
     const { nombre, email, password } = req.body
 
-    
+
     try {
 
         //validamos la existencia del usuario
         const userFound = await Usuario.findOne({ email });
-        if (userFound)  return res.status(400).json(['El email utilizado pertenece a un usuario existente.']);
+        if (userFound) return res.status(400).json(['El email utilizado pertenece a un usuario existente.']);
         //genera un hash
         const passwordHash = await bcrypt.hash(password, 10);
         //creo un nuevo objeto
@@ -84,6 +86,25 @@ export const profile = async (req, res) => {
         email: usuarioEncontrado.email,
         createdAt: usuarioEncontrado.createdAt,
         updatedAt: usuarioEncontrado.updatedAt
+    })
+}
+
+export const verificarToken = async (req, res) => {
+    const { token } = req.cookies
+    if (!token) return res.status(401).json({ message: 'No autorizado' })
+
+    jwt.verify(token, TOKEN_SECRET, async (err, usuario) => {
+        if (err) return res.status(401).json({ message: 'No autorizado' })
+
+        const usuarioEncontrado = await Usuario.findById(usuario.id)
+        if (!usuarioEncontrado) return res.status(401).json({ message: 'No autorizado' })
+        return res.json(
+            {
+                id: usuarioEncontrado.id,
+                username: usuarioEncontrado.nombre,
+                email: usuarioEncontrado.email
+            }
+        )
     })
 }
 
