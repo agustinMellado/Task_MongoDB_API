@@ -39,7 +39,10 @@ const signIn =async(user)=>{
     const res = await loginRequest(user);
     console.log(res)
   }catch (error){// Captura y maneja cualquier error que pueda ocurrir durante el registro.
-    setErrors(error.response.data)
+    if(Array.isArray(error.response.data)){
+     return setErrors(error.response.data)
+    }
+    setErrors([error.response.data.message])
 
   }
 }
