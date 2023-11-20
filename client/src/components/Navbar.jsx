@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../context/authContext";
 
 function Navbar() {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated,logOut } = useAuth();
   return (
     <nav className="bg-zinc-700 my-3 flex justify-between py-5 px-10 rounded-lg">
       <Link to="/home">
@@ -16,7 +16,9 @@ function Navbar() {
               <Link to="/add-task">Añadir Tareas</Link>
             </li>
             <li>
-              <Link to="/register">Cerrar Sesion</Link>
+              <Link to="/"
+              onClick={() => logOut()}
+              >Cerrar Sesion</Link>
             </li>
           </>
         ) : (//sino esto

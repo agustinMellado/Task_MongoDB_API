@@ -1,6 +1,5 @@
 import { createContext, useState, useContext, useEffect } from "react";
-import { registerRequest, verificarToken } from "../api/auth";
-import { loginRequest } from "../api/auth";
+import { logoutRequest, registerRequest,loginRequest, verificarToken } from "../api/auth";
 import Cookies from "js-cookie";
 export const AuthContext = createContext();
 
@@ -51,6 +50,21 @@ export const AuthProvider = ({ children }) => {
       setErrors([error.response.data.message]);
     }
   };
+
+  //cerrar sesion
+  const logOut = async () => {
+    try{
+      const res = await logoutRequest();
+
+      // Cambia el estado de autenticación a true.
+      setIsAuthenticated(false);
+      // Establece el estado del usuario con los datos de la respuesta.
+      setUser(res.data);
+    }catch(error){
+
+    }
+  };
+
   //contador para hacer desaparecer los msj de error
   useEffect(() => {
     if (errors.length > 0) {
@@ -67,33 +81,33 @@ export const AuthProvider = ({ children }) => {
       const cookies = Cookies.get();
       //compruebo si no hay un token
       if (!cookies.token) {
-        setIsAuthenticated(false);//auth en false
-        setLoading(false);//No esta cargando
+        setIsAuthenticated(false); //auth en false
+        setLoading(false); //No esta cargando
         return setUser(null); //retorno usuario en null
       }
       //si existe
       try {
         //primero lo verifico
-        const res = await verificarToken(cookies.token);//tomo el token y lo verifico en el backend
-        if (!res.data) {//si no existe, seteo los valores en false.
+        const res = await verificarToken(cookies.token); //tomo el token y lo verifico en el backend
+        if (!res.data) {
+          //si no existe, seteo los valores en false.
           setIsAuthenticated(false);
           setLoading(false);
           return;
         }
-        //Si encuentra el token, 
-        setIsAuthenticated(true);//Auth ok
-        setUser(res.data);// muestra el usuario y guarda en el estado
-        setLoading(false);//termino de cargar
-      } catch (error) {//Si hay error
-        setIsAuthenticated(false);//auth denegada
+        //Si encuentra el token,
+        setIsAuthenticated(true); //Auth ok
+        setUser(res.data); // muestra el usuario y guarda en el estado
+        setLoading(false); //termino de cargar
+      } catch (error) {
+        //Si hay error
+        setIsAuthenticated(false); //auth denegada
         setUser(null); //usuario nulo
-        setLoading(false);// no carga nada.
+        setLoading(false); // no carga nada.
       }
     }
-    checkLogin()
-  },[]);
-
-
+    checkLogin();
+  }, []);
 
   return (
     //permite compartir los valores a todos los componentes
@@ -102,6 +116,7 @@ export const AuthProvider = ({ children }) => {
         // estos valores pueden ser llamados
         signUp,
         signIn,
+        logOut,
         loading,
         user,
         isAuthenticated,
