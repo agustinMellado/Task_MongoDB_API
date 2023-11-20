@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useTasks } from "../../context/taskContext";
-
+import TaskCard from "../../components/TaskCard";
 function TaskPage() {
   const { getTasks, tasks } = useTasks();
 
@@ -8,18 +8,13 @@ function TaskPage() {
     getTasks();
   }, []);
 
-
-if(tasks.length === 0) return (<h1>NO HAY TAREAS</h1>)
+  if (tasks.length === 0) return <h1>NO HAY TAREAS</h1>;
   return (
     <div>
       {tasks.map((task) => (
-        <div key={task._id}>
-          <h1>{task.title}</h1>
-          <p>{task.description}</p>
-        </div>
+        <TaskCard task={task} key={task._id} />
       ))}
     </div>
-
   );
 }
 
