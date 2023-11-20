@@ -3,15 +3,22 @@ import { useTasks } from "../../context/taskContext";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
 function TaskFormPage() {
-  const { register, handleSubmit } = useForm();
-  const { createTask, getTask} = useTasks();
+  const { register, handleSubmit, setValue } = useForm();
+  const { createTask, getTask } = useTasks();
   const navigate = useNavigate();
   const params = useParams();
 
   useEffect(() => {
-    if(params.id){
-      getTask(params.id);
+   
+     async function loadTask(task) {
+      if (params.id) {
+       const task=await getTask(params.id);
+       console.log(task);
+        setValue("title");
+      }
+  
     }
+    loadTask()
   }, []);
 
   const onSubmit = handleSubmit((data) => {
