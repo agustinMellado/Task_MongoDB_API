@@ -14,7 +14,8 @@ function TaskFormPage() {
       if (params.id) {
        const task=await getTask(params.id);
        console.log(task);
-        setValue("title");
+        setValue("title", task.title);
+        setValue("description", task.description);
       }
   
     }
