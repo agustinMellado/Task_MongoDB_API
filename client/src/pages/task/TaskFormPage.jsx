@@ -3,11 +3,11 @@ import { useTasks } from "../../context/taskContext";
 
 function TaskFormPage() {
   const { register, handleSubmit } = useForm();
-  const { tasks, createTask } = useTasks();
+  const { createTask } = useTasks();
   console.log(createTask());
 
   const onSubmit = handleSubmit((data) => {
-    console.log(data);
+    createTask(data);
   });
   return (
     <div className="bg-zinc-800 max-w-md">
@@ -16,14 +16,14 @@ function TaskFormPage() {
           type="text"
           placeholder="titulo"
           {...register("title")}
-          className="w-full bg-zinc-700 text-white px-4 py-2 rounded-md"
+          className="w-full bg-zinc-700 text-white px-4 py-2 rounded-md my-2"
           autoFocus
         />
         <textarea
-          rows="10"
+          rows="3"
           placeholder="Descripcion"
           {...register("description")}
-          className="w-full bg-zinc-700 text-white px-4 py-2 rounded-md"
+          className="w-full bg-zinc-700 text-white px-4 py-2 rounded-md my-2"
         ></textarea>
         <button>Guardar</button>
       </form>

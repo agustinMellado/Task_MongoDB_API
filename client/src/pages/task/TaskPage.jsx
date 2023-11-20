@@ -1,12 +1,23 @@
-import React from 'react'
-import { useAuth } from '../../context/authContext'
+import React, { useEffect } from "react";
+import { useTasks } from "../../context/taskContext";
 
 function TaskPage() {
+  const { getTasks, tasks } = useTasks();
 
-  const {user} = useAuth()
+  useEffect(() => {
+    getTasks();
+  }, []);
   return (
-    <div>TaskPage</div>
-  )
+    <div>
+      {tasks.map((task) => (
+        <div key={task._id}>
+          <h1>{task.title}</h1>
+          <p>{task.description}</p>
+        </div>
+      ))}
+    </div>
+
+  );
 }
 
-export default TaskPage
+export default TaskPage;
