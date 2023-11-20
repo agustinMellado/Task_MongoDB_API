@@ -38,10 +38,9 @@ export function TaskProvider({ children }) {
   //borrar tarea
   const deleteTask = async (id) => {
     try {
-
       const res = await deleteTaskRequest(id);
       //si se borro que refresque y llame a los existentes
-      if(res.status=== 204) setTasks(tasks.filter(task=> task._id != id))
+      if (res.status === 204) setTasks(tasks.filter((task) => task._id != id));
     } catch (error) {
       console.log(error);
     }
