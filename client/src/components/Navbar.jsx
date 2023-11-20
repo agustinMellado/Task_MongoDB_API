@@ -18,7 +18,7 @@ function Navbar() {
               <Link to="/add-task">Añadir Tareas</Link>
             </li>
             <li>
-              <Link to="/"
+              <Link className="bg-red-600 rounded-lg  px-4 py-1" to="/"
               onClick={() => logOut()}
               >Cerrar Sesion</Link>
             </li>
