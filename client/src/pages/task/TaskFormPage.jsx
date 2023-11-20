@@ -4,27 +4,31 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
 function TaskFormPage() {
   const { register, handleSubmit, setValue } = useForm();
-  const { createTask, getTask } = useTasks();
+  const { createTask, getTask, updateTask } = useTasks();
   const navigate = useNavigate();
   const params = useParams();
 
   useEffect(() => {
-   
-     async function loadTask(task) {
+    async function loadTask() {
       if (params.id) {
-       const task=await getTask(params.id);
-       console.log(task);
+        const task = await getTask(params.id);
+        console.log(task);
         setValue("title", task.title);
         setValue("description", task.description);
       }
-  
     }
-    loadTask()
+    loadTask();
   }, []);
 
   const onSubmit = handleSubmit((data) => {
-    createTask(data);
-    //una vez creada la tarea redirecciono.
+    //verifico si esta editando o creando
+    if (params.id) {
+      //si esta editando
+      updateTask(params.id, data);
+    } else {
+      //si esta creando
+      createTask(data);
+    } //una vez creada o editada la tarea redirecciono.
     navigate("/tasks");
   });
   return (
