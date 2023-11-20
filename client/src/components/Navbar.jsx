@@ -13,7 +13,7 @@ function Navbar() {
         {isAuthenticated ? (//si esta auth muestra esto
         //contenido dentro de un fragmento
           <>
-            <li>Bienvenido {user.nombre}</li>
+            <li>Bienvenido {user.username}</li>
             <li>
               <Link to="/add-task">Añadir Tareas</Link>
             </li>
