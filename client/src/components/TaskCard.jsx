@@ -1,21 +1,24 @@
+import { Link } from "react-router-dom";
 import { useTasks } from "../context/taskContext";
 
-
-
-
 function TaskCard({ task }) {
-  const{deleteTask}=useTasks()
+  const { deleteTask } = useTasks();
   return (
     <div className="bg-zinc-800 max-w-md w-full p-10 rounded-md">
       <header className="flex justify-between">
         <h1 className="text-2xl font-bold">{task.title}</h1>
         <div className="flex gap-x-2 items-center">
           <button
-          onClick={() =>{
-            deleteTask(task._id);
-          }}
-          >Borrar</button>
-          <button>Editar</button>
+            onClick={() => {
+              deleteTask(task._id);
+            }}
+          >
+            Borrar
+          </button>
+
+          <button>
+            <Link to={`/tasks/${task._id}`}> Editar</Link>
+          </button>
         </div>
       </header>
 
