@@ -2,7 +2,8 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../context/authContext";
 
 function Navbar() {
-  const { isAuthenticated,logOut } = useAuth();
+  const { isAuthenticated,logOut,user } = useAuth();
+  console.log(user)
   return (
     <nav className="bg-zinc-700 my-3 flex justify-between py-5 px-10 rounded-lg">
       <Link to="/home">
@@ -12,6 +13,7 @@ function Navbar() {
         {isAuthenticated ? (//si esta auth muestra esto
         //contenido dentro de un fragmento
           <>
+            <li>Bienvenido {user.nombre}</li>
             <li>
               <Link to="/add-task">Añadir Tareas</Link>
             </li>
