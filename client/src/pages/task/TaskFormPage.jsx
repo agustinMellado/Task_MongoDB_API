@@ -1,15 +1,23 @@
 import { useForm } from "react-hook-form";
 import { useTasks } from "../../context/taskContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { useEffect } from "react";
 function TaskFormPage() {
   const { register, handleSubmit } = useForm();
-  const { createTask } = useTasks();
-  const navigate = useNavigate()
+  const { createTask, getTask} = useTasks();
+  const navigate = useNavigate();
+  const params = useParams();
+
+  useEffect(() => {
+    if(params.id){
+      getTask(params.id);
+    }
+  }, []);
+
   const onSubmit = handleSubmit((data) => {
     createTask(data);
     //una vez creada la tarea redirecciono.
-    navigate('/tasks')
-    
+    navigate("/tasks");
   });
   return (
     <div className="bg-zinc-800 max-w-md">
