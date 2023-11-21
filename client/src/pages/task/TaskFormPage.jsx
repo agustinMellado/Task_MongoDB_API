@@ -2,6 +2,8 @@ import { useForm } from "react-hook-form";
 import { useTasks } from "../../context/taskContext";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
+import utc from 'dayjs/plugin/utc'
+import dayjs from 'dayjs'
 function TaskFormPage() {
   const { register, handleSubmit, setValue } = useForm();
   const { createTask, getTask, updateTask } = useTasks();
@@ -24,10 +26,16 @@ function TaskFormPage() {
     //verifico si esta editando o creando
     if (params.id) {
       //si esta editando
-      updateTask(params.id, data);
+    updateTask(params.id,{
+      ...data,
+      date:dayjs.utc(date.date).format()//le doy nuevo formato a la fecha
+    });
     } else {
       //si esta creando
-      createTask(data);
+      createTask({
+        ...data,
+        date:dayjs.utc(date.date).format()//le doy nuevo formato a la fecha
+      });
     } //una vez creada o editada la tarea redirecciono.
     navigate("/tasks");
   });
