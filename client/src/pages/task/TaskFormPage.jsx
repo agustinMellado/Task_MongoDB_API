@@ -41,9 +41,10 @@ function TaskFormPage() {
     navigate("/tasks");
   });
   return (
-    <div className="bg-zinc-800 max-w-md">
+    <div className=" flex h-[calc(70vh-100px)] items-center justify-center">
+      <div className="bg-zinc-800 max-w-md w-full p-10 rounded-md text-center ">
       <form onSubmit={onSubmit}>
-        <label htmlFor="title">title</label>
+        <label htmlFor="title">Titulo</label>
         <input
           type="text"
           placeholder="titulo"
@@ -64,10 +65,12 @@ function TaskFormPage() {
           {...register("date")}
           className="w-full bg-zinc-700 text-white px-4 py-2 rounded-md my-2"
         />
-        <button className="w-full bg-indigo-500 px-3 py-2 rounded-md">
+        <button className="w-full bg-indigo-500  hover:bg-indigo-600 px-3 py-2 rounded-md">
           Guardar
         </button>
       </form>
+      </div>
+      
     </div>
   );
 }

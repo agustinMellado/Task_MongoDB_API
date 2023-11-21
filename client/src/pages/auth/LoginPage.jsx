@@ -21,7 +21,7 @@ function LoginPage() {
   },[isAuthenticated])
 
   return (
-    <div className="flex h-[calc(100vh-100px)] items-center justify-center">
+    <div className="flex h-[calc(90vh-100px)] items-center justify-center">
       <div className="bg-zinc-800 max-w-md w-full p-10 rounded-md text-center ">
         {signInErrors.map((error, i) => (
           <div className="bg-red-500 p-2 my-2" key={i}>

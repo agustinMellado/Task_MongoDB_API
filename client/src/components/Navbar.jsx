@@ -7,7 +7,7 @@ function Navbar() {
   return (
     <nav className="bg-zinc-700 my-3 flex justify-between py-5 px-10 rounded-lg">
       <Link to="/home">
-        <h1 className="text-2xl font-bold">TAREAS MDB</h1>
+        <h1 className="text-2xl font-bold  hover:bg-zinc-600 rounded-lg  px-2 ">TAREAS MDB</h1>
       </Link>
       <ul className="flex gap-x-4">
         {isAuthenticated ? (//si esta auth muestra esto
@@ -15,10 +15,12 @@ function Navbar() {
           <>
             <li>Bienvenido {user.username}</li>
             <li>
-              <Link to="/add-task">Añadir Tareas</Link>
+              <Link  
+              className=" hover:bg-zinc-600 rounded-lg  px-4 py-2"
+              to="/add-task">Añadir Tareas</Link>
             </li>
             <li>
-              <Link className="bg-red-600 rounded-lg  px-4 py-1" to="/"
+              <Link className="bg-red-500 hover:bg-red-600 rounded-lg  px-4 py-2" to="/"
               onClick={() => logOut()}
               >Cerrar Sesion</Link>
             </li>
