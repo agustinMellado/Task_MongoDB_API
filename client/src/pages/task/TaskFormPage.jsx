@@ -34,6 +34,7 @@ function TaskFormPage() {
   return (
     <div className="bg-zinc-800 max-w-md">
       <form onSubmit={onSubmit}>
+        <label htmlFor="title">title</label>
         <input
           type="text"
           placeholder="titulo"
@@ -41,13 +42,18 @@ function TaskFormPage() {
           className="w-full bg-zinc-700 text-white px-4 py-2 rounded-md my-2"
           autoFocus
         />
+        <label htmlFor="description">Descripcion</label>
         <textarea
           rows="3"
           placeholder="Descripcion"
           {...register("description")}
           className="w-full bg-zinc-700 text-white px-4 py-2 rounded-md my-2"
         ></textarea>
-        <button>Guardar</button>
+        <label htmlFor="date">Fecha</label>
+        <input type="date" {...register("date")}
+        className="w-full bg-zinc-700 text-white px-4 py-2 rounded-md my-2"
+        />
+        <button className="w-full bg-indigo-500 px-3 py-2 rounded-md">Guardar</button>
       </form>
     </div>
   );
