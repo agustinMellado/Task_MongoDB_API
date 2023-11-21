@@ -2,8 +2,9 @@ import { useForm } from "react-hook-form";
 import { useTasks } from "../../context/taskContext";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
-import utc from 'dayjs/plugin/utc'
-import dayjs from 'dayjs'
+import utc from "dayjs/plugin/utc";
+import dayjs from "dayjs";
+dayjs.extend(utc); //para que extienda el valor
 function TaskFormPage() {
   const { register, handleSubmit, setValue } = useForm();
   const { createTask, getTask, updateTask } = useTasks();
@@ -26,15 +27,15 @@ function TaskFormPage() {
     //verifico si esta editando o creando
     if (params.id) {
       //si esta editando
-    updateTask(params.id,{
-      ...data,
-      date:dayjs.utc(date.date).format()//le doy nuevo formato a la fecha
-    });
+      updateTask(params.id, {
+        ...data,
+        date: dayjs.utc(data.date).format(), //le doy nuevo formato a la fecha
+      });
     } else {
-      //si esta creando
+      //si esta creando 
       createTask({
         ...data,
-        date:dayjs.utc(date.date).format()//le doy nuevo formato a la fecha
+        date: dayjs.utc(data.date).format(), //le doy nuevo formato a la fecha
       });
     } //una vez creada o editada la tarea redirecciono.
     navigate("/tasks");
@@ -58,10 +59,14 @@ function TaskFormPage() {
           className="w-full bg-zinc-700 text-white px-4 py-2 rounded-md my-2"
         ></textarea>
         <label htmlFor="date">Fecha</label>
-        <input type="date" {...register("date")}
-        className="w-full bg-zinc-700 text-white px-4 py-2 rounded-md my-2"
+        <input
+          type="date"
+          {...register("date")}
+          className="w-full bg-zinc-700 text-white px-4 py-2 rounded-md my-2"
         />
-        <button className="w-full bg-indigo-500 px-3 py-2 rounded-md">Guardar</button>
+        <button className="w-full bg-indigo-500 px-3 py-2 rounded-md">
+          Guardar
+        </button>
       </form>
     </div>
   );
