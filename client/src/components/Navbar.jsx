@@ -6,7 +6,9 @@ function Navbar() {
   console.log(user)
   return (
     <nav className="bg-zinc-700 my-3 flex justify-between py-5 px-10 rounded-lg">
-      <Link to="/home">
+      <Link to={
+        isAuthenticated ? "/tasks" : "/"}>
+    
         <h1 className="text-2xl font-bold  hover:bg-zinc-600 rounded-lg  px-2 ">TAREAS MDB</h1>
       </Link>
       <ul className="flex gap-x-4">
